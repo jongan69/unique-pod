@@ -12,9 +12,9 @@ A full stack monorepo with
 
 built under The XRP NFT 2022 Hackathon
 
-Mobile: <https://exp.host/@jongan69/kudos>
+Mobile:
 
-Web: <https://kudos-taupe.vercel.app/sign-in>
+Web:
 
 ## Usage
 
