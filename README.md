@@ -8,10 +8,7 @@ A full stack monorepo with
 
 - React Native
 - Nextjs
-- Web3Auth
-- Solidity
-- Chainlink VRF
-- Filecoin NFT.storage
+- Nhost SDK
 
 built under The XRP NFT 2022 Hackathon
 

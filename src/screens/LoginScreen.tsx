@@ -62,7 +62,7 @@ const LoginScreen = ({ navigation }) => {
       toast.success("Logging in with email");
     };
 
-    if (currentWalletAddress?.length > 0 && email?.length > 0) {
+    if (email?.length > 0) {
       try {
         nhost.auth
           .signUp({ email, password: currentWalletAddress })
