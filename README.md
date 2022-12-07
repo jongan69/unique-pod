@@ -26,7 +26,6 @@ Web:
 
 ### Features
 
-- Built using Web3auth
 - Has nhost for Graph QL DB if needed
 - Has Nextjs App for API
 - File Reading Functions
