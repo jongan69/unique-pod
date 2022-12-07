@@ -26,7 +26,7 @@ import FacebookSVG from "../assets/images/misc/facebook.svg";
 import { AppContext } from "../context/AppProvider";
 import { useNhostClient } from "@nhost/react";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const {
     setCurrentWalletAddress,
     currentWalletAddress,
@@ -42,31 +42,24 @@ const LoginScreen = () => {
   const { colors } = useTheme();
   const nhost = useNhostClient();
 
-  // Uses Web3Auth SDK to generate a Wallet Private key from provider
-  // Then attempts to generate a wallet address from the private key from sdk
-  // Then use nHost to create User Account with wallet address as the password
-  // needs added randomness for security
-  const Login = async (Provider: string) => {
-    const id = toast.loading("Registering with provider...");
 
+  const Login = async (Provider: string) => {
+    const id = toast.loading("Logging in...");
     setTimeout(() => {
       toast.dismiss(id);
     }, 3000);
 
-    // Create Toast for private key generating wallet address
 
   };
 
   // Use Default Passwordless email sign in
   const DefaultLogin = async (email: string) => {
-
     console.log("Address was: ", email);
     if (email.length < 80 && emailRegex.test(email)) {
       console.log(
         `Wallet Entry ${address} was valid, call or create user in DB: `
       );
       toast.success("Logging in with email");
-
     };
 
     if (currentWalletAddress?.length > 0 && email?.length > 0) {
@@ -142,7 +135,8 @@ const LoginScreen = () => {
               DefaultLogin(email);
             }}
           />
-          <Text
+
+          {/* <Text
             style={{
               textAlign: "center",
               color: colors.text,
@@ -150,8 +144,9 @@ const LoginScreen = () => {
             }}
           >
             Or, login with ...
-          </Text>
-          <View
+          </Text> */}
+
+          {/* <View
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
@@ -197,7 +192,7 @@ const LoginScreen = () => {
             >
               <FacebookSVG height={24} width={24} />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View
             style={{
               flexDirection: "row",
@@ -205,16 +200,16 @@ const LoginScreen = () => {
               marginBottom: 30,
             }}
           >
-            {/* <Text 
-          style={{
-            color: colors.text,
-          }}
-          >
-            New to the app?
+            <Text
+              style={{
+                color: colors.text,
+              }}
+            >
+              New to the app?
             </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={{ color: colors.primary, fontWeight: '700' }}> Register </Text>
-          </TouchableOpacity> */}
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+              <Text style={{ color: colors.primary, fontWeight: '700' }}> Register </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAwareScrollView>

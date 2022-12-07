@@ -73,9 +73,9 @@ const CustomDrawer = (
   //   });
   // };
 
-  React.useEffect(() => {
-    getBalance(key);
-  }, []);
+  // React.useEffect(() => {
+  //   getBalance(key);
+  // }, []);
 
   return (
     <View style={{ flex: 1 }}>

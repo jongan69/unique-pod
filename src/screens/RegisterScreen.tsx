@@ -20,6 +20,8 @@ import GoogleSVG from '../assets/images/misc/google.svg';
 import FacebookSVG from '../assets/images/misc/facebook.svg';
 import CustomButton from '../components/CustomButton';
 import { useTheme } from '@react-navigation/native';
+import { AppContext } from '../context/AppProvider';
+import { useNhostClient } from '@nhost/react';
 
 
 
@@ -136,7 +138,7 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
           Register
         </Text>
 
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -178,14 +180,14 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
             }}>
             <FacebookSVG height={24} width={24} />
           </TouchableOpacity>
-        </View>
+        </View> */}
 
-        <Text style={{ textAlign: 'center', color: colors.textLight, marginBottom: 30 }}>
+        {/* <Text style={{ textAlign: 'center', color: colors.textLight, marginBottom: 30 }}>
           Or, register with email ...
-        </Text>
+        </Text> */}
 
         <InputField
-          label={'Email ID'}
+          label={'Email'}
           icon={
             <MaterialIcons
               name="alternate-email"
@@ -195,6 +197,21 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
             />
           }
           keyboardType="email-address"
+          value={email}
+          onChangeText={(value: string) => setEmail(value)}
+        />
+
+        <InputField
+          label={'Password'}
+          icon={
+            <MaterialIcons
+              name="lock"
+              size={20}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          keyboardType="password"
           value={email}
           onChangeText={(value: string) => setEmail(value)}
         />
