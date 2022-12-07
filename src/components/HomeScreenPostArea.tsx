@@ -3,7 +3,7 @@ import { SafeAreaView, TextInput, Image, View, Text, Pressable } from "react-nat
 import { styles } from "../constants/style";
 import { useTheme } from "@react-navigation/native";
 import { AppContext } from "../context/AppProvider";
-import RPC from '../../ethersRPC'; // for using ethers.js
+// import RPC from '../../ethersRPC'; // for using ethers.js
 import { toast } from "@backpackapp-io/react-native-toast";
 
 const HomeScreenPostArea = () => {
@@ -16,16 +16,16 @@ const HomeScreenPostArea = () => {
   const postFavor = async (FavorText: string) => {
     try {
       let load = toast.loading("Sending Favor to Blockchain...");
-      const post = await RPC.postFavor(FavorText, key);
+      // const post = await RPC.postFavor(FavorText, key);
       setTimeout(() => {
         toast.dismiss(load);
       }, 3000);
       
-      if(post?.length > 0) {
-        setData(post);
-        onChangeText('');
-        toast.error(`Successfully Post Favor!: ${post}`);
-      }
+    //   if(post?.length > 0) {
+    //     setData(post);
+    //     onChangeText('');
+    //     toast.error(`Successfully Post Favor!: ${post}`);
+    //   }
     } catch (e) {
       toast.error(`Failed to Post Favor: ${e}`);
     }

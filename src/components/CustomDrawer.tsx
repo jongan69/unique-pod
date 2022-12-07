@@ -25,7 +25,7 @@ import {
   DrawerNavigationHelpers,
   DrawerDescriptorMap,
 } from "@react-navigation/drawer/lib/typescript/src/types";
-import RPC from "../../ethersRPC"; // for using ethers.js
+// import RPC from "../../ethersRPC"; // for using ethers.js
 
 const CustomDrawer = (
   props:
@@ -61,17 +61,17 @@ const CustomDrawer = (
     });
   };
 
-  const getBalance = async (key: string) => {
-    const id = toast.loading("Getting Balance...");
-    await RPC.getBalance(key).then((bal) => {
-      console.log(bal);
-      setBalance(bal);
-      // setBalance(parseInt(bal.toHexString(), 16))
-      setTimeout(() => {
-        toast.dismiss(id);
-      }, 3000);
-    });
-  };
+  // const getBalance = async (key: string) => {
+  //   const id = toast.loading("Getting Balance...");
+  //   await RPC.getBalance(key).then((bal) => {
+  //     console.log(bal);
+  //     setBalance(bal);
+  //     // setBalance(parseInt(bal.toHexString(), 16))
+  //     setTimeout(() => {
+  //       toast.dismiss(id);
+  //     }, 3000);
+  //   });
+  // };
 
   React.useEffect(() => {
     getBalance(key);

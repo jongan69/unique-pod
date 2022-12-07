@@ -24,6 +24,7 @@ import FacebookSVG from "../assets/images/misc/facebook.svg";
 
 // Email -> Key -> Address
 import { AppContext } from "../context/AppProvider";
+import { useNhostClient } from "@nhost/react";
 
 const LoginScreen = () => {
   const {

@@ -12,7 +12,6 @@ import { styles } from "../constants/style";
 import { useTheme } from "@react-navigation/native";
 import CustomSwitch from "../components/CustomSwitch";
 import { AppContext } from "../context/AppProvider";
-import RPC from "../../ethersRPC"; // for using ethers.js
 import HomeScreenHeader from "../components/HomescreenHeader";
 import { toast } from "@backpackapp-io/react-native-toast";
 import FavorCard from "../components/FavorCard";
@@ -38,9 +37,9 @@ export default function HomeScreen({ navigation }) {
   //Function to get all Incomplete Favors
   const getFavors = async () => {
     const id = toast.loading("Getting All Favors...");
-    const favs = await RPC.getAllIncompleteFavors(key);
+    // const favs = await RPC.getAllIncompleteFavors(key);
     // favors.forEach((item, index) => console.log('Favors', index))
-    setFavors(favs);
+    // setFavors(favs);
     setTimeout(() => {
       toast.dismiss(id);
       setRefreshing(false);
