@@ -30,7 +30,6 @@ Web: <https://kudos-taupe.vercel.app/sign-in>
 - Has nhost for Graph QL DB if needed
 - Has Nextjs App for API
 - File Reading Functions
-- Has Smart Contract for Favor Posting, Retrieving, Completing, and payment
 
 in a new `.env`
    backendUrl: "YOUR_NHOST_BACKEND_URL",
