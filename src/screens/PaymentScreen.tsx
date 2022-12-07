@@ -131,7 +131,7 @@ const Payment = ({ navigation }) => {
                   fontSize: 19,
                 }}
               >
-                Kudos Token:
+                NFTS Owned: 0
               </Text>
 
               <Text
@@ -141,7 +141,7 @@ const Payment = ({ navigation }) => {
                   fontSize: 19,
                 }}
               >
-                Eth:
+                XRP:0
               </Text>
             </View>
           </View>

@@ -13,11 +13,7 @@ import {
 import CustomSwitch from "../components/CustomSwitch";
 import { styles } from "../constants/style";
 
-const TodoScreen = ({ navigation }) => {
-  const [favorsTab, setfavorsTab] = useState(1);
-  const onSelectSwitch = (value: React.SetStateAction<number>) => {
-    setfavorsTab(value);
-  };
+const NFTScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
@@ -41,7 +37,7 @@ const TodoScreen = ({ navigation }) => {
               padding: 1,
             }}
           >
-            <Text style={styles.h1}>Pending Favors</Text>
+            <Text style={styles.h1}>Minted Podcasts</Text>
             {ToDoList.map((item) =>
               item.isCompleted ? (
                 <ToDoItem
@@ -51,32 +47,7 @@ const TodoScreen = ({ navigation }) => {
                   name={item.name}
                   completed={item.isCompleted}
                 />
-              ) : (
-                <></>
-              )
-            )}
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              padding: 1,
-            }}
-          >
-            <Text style={styles.h1}>Completed Items</Text>
-            {ToDoList.map((item) =>
-              !item.isCompleted ? (
-                <ToDoItem
-                  uri={item.uri}
-                  service={item.service}
-                  walletAddress={item.walletAddress}
-                  name={item.name}
-                  completed={item.isCompleted}
-                />
-              ) : (
-                <></>
-              )
+              ) : null
             )}
           </View>
         </View>
@@ -85,4 +56,4 @@ const TodoScreen = ({ navigation }) => {
   );
 };
 
-export default TodoScreen;
+export default NFTScreen;

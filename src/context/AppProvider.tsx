@@ -4,7 +4,7 @@ interface AppContextInterface {
     key: string,
     email: string,
     userInfo: object,
-    favors: Array<[]>
+    nfts: Array<[]>
 }
 
 export const AppContext = createContext<AppContextInterface | any>({});
@@ -14,11 +14,11 @@ export const AppProvider = (props: { children: any }) => {
     const [key, setKey] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [userInfo, setUserInfo] = useState({});
-    const [favors, setFavors] = useState([]);
+    const [nfts, setNfts] = useState([]);
 
     
     return (
-        <AppContext.Provider value={{ currentWalletAddress, setCurrentWalletAddress, key, setKey, email, setEmail, userInfo, setUserInfo, favors, setFavors }}>
+        <AppContext.Provider value={{ currentWalletAddress, setCurrentWalletAddress, key, setKey, email, setEmail, userInfo, setUserInfo, nfts, setNfts }}>
             {props.children}
         </AppContext.Provider >
     )

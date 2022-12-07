@@ -8,7 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from '@react-navigation/native';
 import PaymentScreen from '../PaymentScreen';
-import TodoScreen from '../TodoScreen';
+import NFTScreen from '../NFTScreen';
 import OffersScreen from '../OffersScreen';
 
 const Tab = createBottomTabNavigator();
@@ -20,7 +20,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Favors"
+        name="Home"
         component={HomeScreen}
         options={{headerShown: false}}
       />
@@ -60,11 +60,11 @@ const TabNavigator = () => {
         })}
       />
       <Tab.Screen
-        name="Todo"
-        component={TodoScreen}
+        name="Podcasts"
+        component={NFTScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Feather name="list" color={color} size={size} />
+            <Feather name="plus" color={color} size={size} />
           ),
         }}
       />

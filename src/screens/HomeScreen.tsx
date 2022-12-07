@@ -20,9 +20,9 @@ import { Feather } from "@expo/vector-icons";
 import AcceptButton from "../components/AcceptButton";
 
 export default function HomeScreen({ navigation }) {
-  const { key, currentWalletAddress, favors, setFavors } =
+  const { key, currentWalletAddress, nfts, setNfts } =
     React.useContext(AppContext);
-  const [favorsTab, setfavorsTab] = useState(1);
+  const [homeTab, setHomeTab] = useState(1);
   const [refreshing, setRefreshing] = useState(true);
   const [modalVisible, setModalVisible] = React.useState(false);
 
@@ -35,8 +35,8 @@ export default function HomeScreen({ navigation }) {
   );
 
   //Function to get all Incomplete Favors
-  const getFavors = async () => {
-    const id = toast.loading("Getting All Favors...");
+  const getNfts = async () => {
+    const id = toast.loading("Getting All Nfts...");
     // const favs = await RPC.getAllIncompleteFavors(key);
     // favors.forEach((item, index) => console.log('Favors', index))
     // setFavors(favs);
@@ -47,14 +47,14 @@ export default function HomeScreen({ navigation }) {
   };
 
   React.useEffect(() => {
-    getFavors();
+    getNfts();
   }, []);
 
   const onSelectSwitch = (value: React.SetStateAction<number>) => {
-    setfavorsTab(value);
-    if (favorsTab == 2) {
-      navigation.navigate("Favors");
-    }
+    setHomeTab(value);
+    // if (homeTab == 2) {
+    //   navigation.navigate("Favors");
+    // }
   };
 
   const ItemSeparatorView = () => {
@@ -81,7 +81,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView>
       <AcceptModal props={{ modalVisible, setModalVisible }} />
-      {favors?.length > 0 && favorsTab == 1 ? (
+      {homeTab == 1 ? (
         <FlatList
           ListHeaderComponent={
             <View>
@@ -123,8 +123,8 @@ export default function HomeScreen({ navigation }) {
                 <View style={{ width: "100%", alignItems: "center" }}>
                   <CustomSwitch
                     selectionMode={1}
-                    option1="Favors"
-                    option2="Accepted"
+                    option1="Available Podcasts"
+                    option2="Owned"
                     onSelectSwitch={onSelectSwitch}
                   />
                 </View>
@@ -132,25 +132,25 @@ export default function HomeScreen({ navigation }) {
             </View>
           }
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={getFavors} />
+            <RefreshControl refreshing={refreshing} onRefresh={getNfts} />
           }
           // stickyHeaderHiddenOnScroll={false}
-          data={favors}
+          data={nfts}
           keyExtractor={(item, index) => index?.toString()}
           renderItem={ListItem}
           style={{ width: "100%" }}
         />
       ) : null}
 
-      {favorsTab == 2 && (
+      {homeTab == 2 && (
         <View style={{ marginTop: 60, width: "100%", alignItems: "center" }}>
           <CustomSwitch
             selectionMode={2}
-            option1="Favors"
-            option2="Accepted"
+            option1="Available Podcasts"
+            option2="Owned"
             onSelectSwitch={onSelectSwitch}
           />
-          {favors?.length > 0 && (
+          {nfts?.length > 0 && (
             <FlatList
               ListHeaderComponent={
                 <View>
@@ -189,10 +189,10 @@ export default function HomeScreen({ navigation }) {
                 </View>
               }
               refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={getFavors} />
+                <RefreshControl refreshing={refreshing} onRefresh={getNfts} />
               }
               // stickyHeaderHiddenOnScroll={false}
-              data={favors}
+              data={nfts}
               keyExtractor={(item, index) => index?.toString()}
               renderItem={ListItem}
               style={{ width: "100%" }}
