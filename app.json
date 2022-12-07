@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "kudos",
-    "slug": "kudos",
+    "name": "uniquepod",
+    "slug": "uniquepod",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
-    "scheme": "kudos",
-    "githubUrl": "https://github.com/jongan69/kudos",
-    "description": "An app that pays users to do favors for one another",
+    "scheme": "uniquepod",
+    "githubUrl": "https://github.com/jongan69/unique-pod",
+    "description": "UNIQUE POD will allow established and upcoming podcasts and podcasters to mint their audio files into XRP NFT’s.",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./src/assets/images/splash.png",

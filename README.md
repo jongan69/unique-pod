@@ -1,4 +1,4 @@
-# Kudos - Give to get
+# Unique Pod
 
 [![CodeQL](https://github.com/jongan69/kudos/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/jongan69/kudos/actions/workflows/codeql-analysis.yml)
 
@@ -13,37 +13,11 @@ A full stack monorepo with
 - Chainlink VRF
 - Filecoin NFT.storage
 
-built under The Chainlink 2022 Hackathon <https://devpost.com/software/kudos-bzion8>
-
-Test Net Deploy:
-
-## LATEST KUDOS TOKEN CONTRACT ADDRESS (GOERLI): 0x67714a689C38BfEbe0aD191a349aB3084Df415A8
-
-## LATEST FAVORS CONTRACT ADDRESS (GOERLI): 0x693f7fe29CaE09F2110E9dA885769304e6f5cacE
-
-[Remix](https://remix.ethereum.org/#url=https://docs.chain.link/samples/VRF/VRFD20.sol&optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js)
-
------
+built under The XRP NFT 2022 Hackathon
 
 Mobile: <https://exp.host/@jongan69/kudos>
 
 Web: <https://kudos-taupe.vercel.app/sign-in>
-
-## Setup
-
-1. Create Web3Auth.io Account at <https://dashboard.web3auth.io/>
-2. Copy into credentials .env and constant.js
-   Note: `WEB_API_ROUTES` would be the URL of the deployed nextjs app ie: vercel
-3. yarn install inside the root and web directories
-
-### For smart contract functionality
-
-   1. Receive Test Link from <https://faucets.chain.link/>
-   2. Create and Fund a VRF Subscription at <https://vrf.chain.link/>
-   3. Deploy the `contracts/KudosToken.sol` via <https://remix.ethereum.org/> with a Total Token Supply
-   4. Copy Token Contract Address
-   5. Deploy the `contracts/FavorsV2.sol` via <https://remix.ethereum.org/> with subscription ID and Token Contract Address
-   6. Add Favor Contract Address to .env file
 
 ## Usage
 
@@ -72,63 +46,17 @@ To Run Nextjs App:
 
 ### To do
 
-- [x] Expo React Native App
-- [x] Nextjs App
-- [x] Web3Auth - React Native SDK
-- [x] Thirdwebjs Auth - Nextjs SDK
-- [x] ERC20 Contract
-- [x] Chainlink VRF
-- [x] FavorsV2 Contract
-- [x] Mobile App Smart Contract Function Integration:
-        1. Post Button => postFavor(text)
-        2. Refresh Favors Button => getAllIncompleteFavors()
-        3. Offers Tab => getMyFavors()
-        4. Accept Button => acceptFavor
-        5. Mark Completed Button => completeFavor(favorId)
-- [ ] Fix Nextjs App (Connect to Deployed Contract)
-- [ ] User Profile Contract / nHost
-- [ ] Use React-Native-Async-Storage for Persistent Login State and Data
-- [ ] Review +/- Test
-
-Message Signing
-
-`
-const signMessage = async () => {
-    try {
-      setConsole("Signing message");
-      const ethersProvider = ethers.getDefaultProvider(providerUrl);
-      const wallet = new ethers.Wallet(key, ethersProvider);
-      const originalMessage = "YOUR_MESSAGE";
-      // Sign the message
-      const signedMessage = await wallet.signMessage(originalMessage);
-      console.log(signedMessage)
-    } catch (e) {
-      console.log(e)
-    }
-  };
-`
-
-Transaction Sending
-
-`
-const sendTransaction = async () => {
-    try {
-      setConsole("Sending transaction");
-      const ethersProvider = ethers.getDefaultProvider(providerUrl);
-      const wallet = new ethers.Wallet(key, ethersProvider);
-      const destination = "0x40e1c367Eca34250cAF1bc8330E9EddfD403fC56";
-      // Convert 1 ether to wei
-      const amount = ethers.utils.parseEther("0.001");
-      // Submit transaction to the blockchain
-      const tx = await wallet.sendTransaction({
-        to: destination,
-        value: amount,
-        maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
-        maxFeePerGas: "6000000000000", // Max fee per gas
-      });
-      console.log(tx)
-    } catch (e) {
-      console.log(e)
-    }
-  };
-`
+- [x] Expo React Native XRP Mobile App
+- [x] Figma Screen Designs
+- [x] Lucid Charts User Journey Diagram
+- [ ] Nextjs App + Thirdwebjs Auth - Nextjs SDK
+- [ ] Nhost - React Native SDK
+- [ ] Mobile App Screens
+        1. Onboard Screen
+        2. Login Screen -> Nhost
+        3. Sign Up Screen -> Nhost
+        4. Homescreen 1
+        5. Swap Crypto Screen
+        6. About screen
+        7. Purchase Screen
+        8. Mint Screen
