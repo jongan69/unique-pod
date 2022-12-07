@@ -21,27 +21,9 @@ import FacebookSVG from "../assets/images/misc/facebook.svg";
 // import CoinbaseSVG from '../assets/images/misc/coinbase.svg';
 // import TwitterSVG from '../assets/images/misc/twitter.svg';
 
-// WEB3 SDK + Tools
-import { WEB3AUTH_CLIENT_ID, WEB3AUTH_PROVIDERURL } from "@env";
-import Web3Auth, { OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
-import * as Linking from "expo-linking";
-import { Buffer } from "buffer";
-import "@ethersproject/shims";
-import { ethers } from "ethers";
 
-global.Buffer = global.Buffer || Buffer;
-
-const scheme = Constants?.manifest?.slug;
-const resolvedRedirectUrl =
-  Constants.appOwnership == AppOwnership.Expo ||
-    Constants.appOwnership == AppOwnership.Guest
-    ? Linking.createURL("web3auth", {})
-    : Linking.createURL("web3auth", { scheme: scheme });
-
-// Context
 // Email -> Key -> Address
 import { AppContext } from "../context/AppProvider";
-import { useNhostClient } from "@nhost/react";
 
 const LoginScreen = () => {
   const {
@@ -69,146 +51,37 @@ const LoginScreen = () => {
     setTimeout(() => {
       toast.dismiss(id);
     }, 3000);
-    try {
-      console.log("Logging in");
 
-      const web3auth = new Web3Auth(WebBrowser, {
-        clientId: WEB3AUTH_CLIENT_ID,
-        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-        whiteLabel: {
-          name: Constants?.manifest?.name,
-          logoLight: "https://web3auth.io/images/logo-light.png",
-          logoDark: "https://web3auth.io/images/logo-dark.png",
-          defaultLanguage: "en",
-          disclaimerHide: true,
-          dark: true,
-          theme: {
-            primary: colors.primary,
-          },
-        },
-      });
+    // Create Toast for private key generating wallet address
 
-      const info = await web3auth
-        .login({
-          loginProvider: Provider,
-          redirectUrl: resolvedRedirectUrl,
-          mfaLevel: "none",
-          curve: "secp256k1",
-        })
-        .then((info: any) => {
-          console.log("DATA FROM WEB3 AUTH:", info);
-          const ethersProvider = ethers.getDefaultProvider(WEB3AUTH_PROVIDERURL);
-          setUserInfo(info);
-          setKey(info.privKey);
-          const wallet = new ethers.Wallet(info.privKey, ethersProvider);
-
-          // Create Toast for private key generating wallet address
-          if (wallet) toast.success(`Created wallet!: ${wallet?.address}`);
-
-          setAddress(wallet?.address);
-          setEmail(info?.userInfo?.email);
-          setCurrentWalletAddress(wallet?.address);
-          console.log("Logged In", currentWalletAddress);
-          toast.success(`Logged In: ${currentWalletAddress}`);
-
-          if (currentWalletAddress.length > 0 && email.length > 0) {
-            try {
-              nhost.auth
-                .signIn({
-                  email: email,
-                  password: currentWalletAddress,
-                })
-                .then((result: any) => console.log(result))
-                .then(() =>
-                  toast.success("Signed In Successfully!", {
-                    width: 300,
-                  })
-                );
-            } catch {
-              toast.error("There was an error saving your account!");
-            }
-          }
-        });
-      return info;
-    } catch (e: any) {
-      toast.error(e.toString());
-      console.log(e);
-    }
   };
 
   // Use Default Passwordless email sign in
   const DefaultLogin = async (email: string) => {
-    try {
-      console.log("Address was: ", email);
-      if (email.length < 80 && emailRegex.test(email)) {
-        console.log(
-          `Wallet Entry ${address} was valid, call or create user in DB: `
-        );
-        toast.success("Logging in with email");
 
-        const web3auth = new Web3Auth(WebBrowser, {
-          clientId: WEB3AUTH_CLIENT_ID,
-          network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-          whiteLabel: {
-            name: Constants?.manifest?.name,
-            logoLight: "https://web3auth.io/images/logo-light.png",
-            logoDark: "https://web3auth.io/images/logo-dark.png",
-            defaultLanguage: "en",
-            disclaimerHide: true,
-            dark: true,
-            theme: {
-              primary: colors.primary,
-            },
-          },
-        });
+    console.log("Address was: ", email);
+    if (email.length < 80 && emailRegex.test(email)) {
+      console.log(
+        `Wallet Entry ${address} was valid, call or create user in DB: `
+      );
+      toast.success("Logging in with email");
 
-        const info = await web3auth
-          .login({
-            loginProvider: "email_passwordless",
-            redirectUrl: resolvedRedirectUrl,
-            mfaLevel: "none",
-            curve: "secp256k1",
-            extraLoginOptions: {
-              login_hint: email,
-            },
-          })
-          .then((info: any) => {
-            console.log("DATA FROM WEB3 AUTH:", info);
-            const ethersProvider =
-              ethers.getDefaultProvider(WEB3AUTH_PROVIDERURL);
-            setUserInfo(info);
-            setKey(info.privKey);
-            const wallet = new ethers.Wallet(info.privKey, ethersProvider);
-            if (wallet) toast.success(`Created wallet!: ${wallet}`);
-            // Create Toast for private key generating
-            console.log("Logged In", wallet.address);
-            toast.success(`Logged In: ${wallet.address}`);
-            setAddress(wallet.address);
-            setEmail(email);
-            setCurrentWalletAddress(wallet.address);
+    };
 
-            if (currentWalletAddress?.length > 0 && email?.length > 0) {
-              try {
-                nhost.auth
-                  .signUp({ email, password: currentWalletAddress })
-                  .then(() =>
-                    toast.success(`Account Created Successfully!`, {
-                      width: 300,
-                    })
-                  );
-              } catch {
-                toast.error("There was an error saving your account!");
-              }
-            }
-          });
-        return info;
-      } else {
-        toast.error("Invalid Email!");
+    if (currentWalletAddress?.length > 0 && email?.length > 0) {
+      try {
+        nhost.auth
+          .signUp({ email, password: currentWalletAddress })
+          .then(() =>
+            toast.success(`Account Created Successfully!`, {
+              width: 300,
+            })
+          );
+      } catch {
+        toast.error("There was an error saving your account!");
       }
-    } catch (e: any) {
-      toast.error(e.toString());
-      console.log(e);
     }
+
   };
 
   return (
@@ -285,7 +158,7 @@ const LoginScreen = () => {
             }}
           >
             <TouchableOpacity
-              onPress={() => Login("google")}
+              onPress={() => { }}
               style={{
                 backgroundColor: colors.primary,
                 borderColor: colors.border,
@@ -298,7 +171,7 @@ const LoginScreen = () => {
               <GoogleSVG height={24} width={24} />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => Login("apple")}
+              onPress={() => { }}
               style={{
                 backgroundColor: colors.primary,
                 borderColor: colors.border,
@@ -311,7 +184,7 @@ const LoginScreen = () => {
               <AppleSVG height={24} width={24} />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => Login("facebook")}
+              onPress={() => { }}
               style={{
                 backgroundColor: colors.primary,
                 borderColor: colors.border,

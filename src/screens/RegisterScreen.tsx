@@ -21,22 +21,7 @@ import FacebookSVG from '../assets/images/misc/facebook.svg';
 import CustomButton from '../components/CustomButton';
 import { useTheme } from '@react-navigation/native';
 
-// Web3Auth SDK + Tools
-import { WEB3AUTH_CLIENT_ID, WEB3AUTH_PROVIDERURL } from "@env"
-import Web3Auth, { OPENLOGIN_NETWORK } from '@web3auth/react-native-sdk';
-import { ethers } from 'ethers';
-import * as Linking from "expo-linking";
-import * as WebBrowser from "expo-web-browser";
-import { AppContext } from '../context/AppProvider';
-import Constants, { AppOwnership } from 'expo-constants';
-import { useNhostClient } from '@nhost/react';
-global.Buffer = global.Buffer || Buffer;
 
-const scheme = "vate";
-const resolvedRedirectUrl =
-  Constants.appOwnership == AppOwnership.Expo || Constants.appOwnership == AppOwnership.Guest
-    ? Linking.createURL("web3auth", {})
-    : Linking.createURL("web3auth", { scheme: scheme });
 
 // nHost SDK + Tools
 // import Layout from '../constants/Layout'
@@ -72,33 +57,6 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
     setTimeout(() => {
       toast.dismiss(id);
     }, 3000);
-    try {
-      console.log("Logging in");
-      const web3auth = new Web3Auth(WebBrowser, {
-        clientId: WEB3AUTH_CLIENT_ID,
-        network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-      });
-      const info = await web3auth.login({
-        loginProvider: Provider,
-        redirectUrl: resolvedRedirectUrl,
-        mfaLevel: "none",
-        curve: "secp256k1",
-      });
-      const ethersProvider = ethers.getDefaultProvider(WEB3AUTH_PROVIDERURL);
-      setUserInfo(info);
-      setKey(info.privKey)
-
-      const wallet = new ethers.Wallet(key, ethersProvider);
-      setAddress(wallet.address)
-      console.log("Logged In", address);
-      setCurrentWalletAddress(address)
-      toast.success('Success!', {
-        width: 300
-      });
-    } catch (e) {
-      setError(true)
-      console.log(e);
-    }
   };
 
   // Use Nhost to sign up user for a Wallet Address from email
