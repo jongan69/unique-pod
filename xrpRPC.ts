@@ -31,7 +31,7 @@ export async function getAllNfts() {
     client.disconnect()
 }
 
-export async function mintToken() {
+export async function mintToken(podcast) {
   results = 'Connecting to ' + getNet() + '....'
   document.getElementById('standbyResultField').value = results
   let net = getNet()
@@ -52,6 +52,8 @@ export async function mintToken() {
     "TransferFee": parseInt(standbyTransferFeeField.value),
     "NFTokenTaxon": 0 //Required, but if you have no use for it, set to zero.
   }
+}
+
 
 export async function oPmintToken() {
     results = 'Connecting to ' + getNet() + '....'
