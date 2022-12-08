@@ -64,23 +64,9 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
             <Text style={styles.modalText}>Minting your Podcast...</Text>
             <ActivityIndicator size={20} style={styles.indicator} />
             {mintData && <Text>{mintData?.toString()}</Text>}
-            {/* <InputField
-              label={'Dont be shy, ask for a favor!'}
-              icon={<Ionicons
-                name="mail"
-                size={20}
-                color={colors.primary}
-                style={{ marginRight: 5 }} />}
-              value={favorText}
-              onChangeText={(value: string) => setFavorText(value)}
-              inputType="favor"
-              keyboardType={undefined}
-              // fieldButtonLabel="Favor" 
-              fieldButtonFunction={undefined}
-            /> */}
             <Pressable
               style={[styles.button, { backgroundColor: colors.primary }]}
-              onPress={() => { }}>
+              onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>Done</Text>
             </Pressable>
           </View>
