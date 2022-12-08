@@ -14,7 +14,7 @@ import CustomSwitch from "../components/CustomSwitch";
 import { AppContext } from "../context/AppProvider";
 import HomeScreenHeader from "../components/HomescreenHeader";
 import { toast } from "@backpackapp-io/react-native-toast";
-import FavorCard from "../components/FavorCard";
+import FavorCard from "../components/PodcastCard";
 import { AcceptModal } from "../components/AcceptModal";
 import { Feather } from "@expo/vector-icons";
 import AcceptButton from "../components/AcceptButton";

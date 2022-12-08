@@ -2,7 +2,7 @@ import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
 import ProfileImage from "../components/ProfileImage";
 import ToDoItem from "../components/ToDoItem";
-import { ToDoList } from "../constants/favorsList";
+import { ToDoList } from "../constants/fakePodcasts";
 import {
   ScrollView,
   SafeAreaView,
