@@ -9,9 +9,28 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button
 } from "react-native";
 import CustomSwitch from "../components/CustomSwitch";
 import { styles } from "../constants/style";
+import * as DocumentPicker from ‘expo-document-picker’;
+
+//Expo document picker
+
+_pickDocument = async () => {
+
+  let result = await DocumentPicker.getDocumentAsync({});
+  
+  alert(result.uri);
+  
+  console.log(result);
+  
+  }
+
+  // <Button
+  // title=”Select Document”
+  // onPress={this._pickDocument}
+  // />
 
 const MintScreen = ({ navigation }) => {
 
@@ -28,6 +47,7 @@ const MintScreen = ({ navigation }) => {
         >
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <ProfileImage />
+           
           </TouchableOpacity>
           <View
             style={{
