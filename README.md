@@ -12,7 +12,7 @@ A full stack monorepo with
 
 built under The XRP NFT 2022 Hackathon
 
-Mobile:
+Mobile: <https://expo.dev/@jongan69/uniquepod>
 
 Web:
 
