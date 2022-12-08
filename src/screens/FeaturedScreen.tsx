@@ -6,7 +6,7 @@ const FeaturedScreen = () => {
   const { colors } = useTheme();
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{  color: colors.text }}>FeaturedScreen</Text>
+      <Text style={{  color: colors.text }}>Featured Podcasts Screen</Text>
     </View>
   );
 };
