@@ -36,6 +36,7 @@ const LoginScreen = ({ navigation }) => {
     setKey,
     userInfo,
     setUserInfo,
+    setLoggedin
   } = React.useContext(AppContext);
   const [address, setAddress] = useState<string>("");
   let emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -48,33 +49,31 @@ const LoginScreen = ({ navigation }) => {
     setTimeout(() => {
       toast.dismiss(id);
     }, 3000);
-
-
   };
 
   // Use Default Passwordless email sign in
   const DefaultLogin = async (email: string) => {
-    console.log("Address was: ", email);
+    console.log("Email was: ", email);
+
     if (email.length < 80 && emailRegex.test(email)) {
       console.log(
-        `Wallet Entry ${address} was valid, call or create user in DB: `
+        `Email ${address} was valid, call async or create user in DB: `
       );
-      toast.success("Logging in with email");
-    };
 
-    if (email?.length > 0) {
       try {
         nhost.auth
-          .signUp({ email, password: currentWalletAddress })
-          .then(() =>
-            toast.success(`Account Created Successfully!`, {
-              width: 300,
-            })
-          );
+          .signIn({ email })
+          .then(() => {
+            const id = toast.loading("Check your email...");
+            setTimeout(() => {
+              toast.dismiss(id);
+            }, 3000);
+          });
+        toast.success("Logging in with email");
       } catch {
         toast.error("There was an error saving your account!");
       }
-    }
+    };
 
   };
 
@@ -209,6 +208,18 @@ const LoginScreen = ({ navigation }) => {
             </Text>
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
               <Text style={{ color: colors.primary, fontWeight: '700' }}> Register </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginBottom: 30,
+            }}
+          >
+            <TouchableOpacity onPress={() => setLoggedin('guest')}>
+              <Text style={{ color: colors.primary, fontWeight: '700' }}> Continue as Guest </Text>
             </TouchableOpacity>
           </View>
         </View>

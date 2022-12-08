@@ -3,6 +3,7 @@ import 'text-encoding';
 
 const SERVER_URL = "wss://s.altnet.rippletest.net:51233";
 
+
 export async function CreateWallet() {
     const client = new xrpl.Client(SERVER_URL);
     await client.connect();
@@ -12,6 +13,7 @@ export async function CreateWallet() {
     console.log(fund_result)
     return fund_result;
 }
+
 
 export async function Connect() {
     const client = new xrpl.Client(SERVER_URL);
@@ -24,6 +26,19 @@ export async function Connect() {
     // Disconnect when done (If you omit this, Node.js won't end the process)
     client.disconnect()
 }
+
+export async function getAllNfts() {
+    const client = new xrpl.Client(SERVER_URL);
+
+    // Define the network client
+    await client.connect()
+
+    // ... custom code goes here
+
+    // Disconnect when done (If you omit this, Node.js won't end the process)
+    client.disconnect()
+}
+
 
 export async function AccountDetails(address) {
     const client = new xrpl.Client(SERVER_URL);

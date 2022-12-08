@@ -24,9 +24,10 @@ const linking: LinkingOptions<RootStackParamList | AuthStackParamList> = {
         screens: {
           Home: 'Home',
           Offers: 'Offers',
+          Featured: 'Featured',
           Profile: 'Profile',
-          Messages: 'Messages',
-          Settings: 'Settings',
+          Mint: 'Mint',
+          Payment: 'Payment'
         },
       },
       Modal: 'modal',

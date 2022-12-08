@@ -2,13 +2,13 @@ import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { View, Text } from "react-native";
 
-const OffersScreen = () => {
+const FeaturedScreen = () => {
   const { colors } = useTheme();
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Offer Screen</Text>
+      <Text style={{  color: colors.text }}>FeaturedScreen</Text>
     </View>
   );
 };
 
-export default OffersScreen;
+export default FeaturedScreen;

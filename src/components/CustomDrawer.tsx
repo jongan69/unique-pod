@@ -47,6 +47,7 @@ const CustomDrawer = (
     key,
     setEmail,
     setUserInfo,
+    setLoggedin
   } = React.useContext(AppContext);
   const [balance, setBalance] = React.useState(0);
 
@@ -55,6 +56,7 @@ const CustomDrawer = (
     setKey("");
     setUserInfo("");
     setEmail("");
+    setLoggedin(false);
     setCurrentWalletAddress("");
     toast.error("Logged Out", {
       width: 300,

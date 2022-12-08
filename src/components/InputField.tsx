@@ -10,7 +10,8 @@ export default function InputField({
   fieldButtonLabel,
   fieldButtonFunction,
   value,
-  onChangeText
+  onChangeText,
+  secure
 }) {
   const { colors } = useTheme();
   return (
@@ -29,7 +30,7 @@ export default function InputField({
           placeholder={label}
           keyboardType={keyboardType}
           style={{flex: 1, color: colors.text}}
-          secureTextEntry={true}
+          secureTextEntry={secure}
           value={value}
           onChangeText={onChangeText}
         />

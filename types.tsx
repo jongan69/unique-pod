@@ -13,13 +13,24 @@ declare global {
   }
 }
 
+export type RootTabParamList = {
+  Home:undefined;
+  Featured: undefined;
+  Mint: undefined;
+  Profile: undefined;
+  Offers: undefined;
+  Payment: undefined;
+};
+
+export type AuthNavParamList = {
+  OnBoarding: undefined;
+  Login: undefined;
+  Register: undefined;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Auth: NavigatorScreenParams<AuthNavParamList> | undefined;
-  Home:undefined;
-  Offers: undefined;
-  Profile: undefined;
-  Messages: undefined;
   Settings: undefined;
 };
 
@@ -30,8 +41,8 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 
 export type AuthStackParamList = {
   Auth: NavigatorScreenParams<AuthNavParamList> | undefined;
-  Modal: undefined,
-  NotFound: undefined,
+  Modal: undefined;
+  NotFound: undefined;
 };
 
 export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = NativeStackScreenProps<
@@ -39,16 +50,4 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
   Screen
 >;
 
-export type RootTabParamList = {
-  Home:undefined;
-  Offers: undefined;
-  Profile: undefined;
-  Messages: undefined;
-  Settings: undefined;
-};
 
-export type AuthNavParamList = {
-  OnBoarding: undefined;
-  Login: undefined;
-  Register: undefined
-};

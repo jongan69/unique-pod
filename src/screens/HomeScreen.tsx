@@ -18,9 +18,10 @@ import FavorCard from "../components/FavorCard";
 import { AcceptModal } from "../components/AcceptModal";
 import { Feather } from "@expo/vector-icons";
 import AcceptButton from "../components/AcceptButton";
+import * as XRPFunctions from '../../xrpRPC';
 
 export default function HomeScreen({ navigation }) {
-  const { key, currentWalletAddress, nfts, setNfts } =
+  const { email, nfts, setNfts, currentWalletAddress, key } =
     React.useContext(AppContext);
   const [homeTab, setHomeTab] = useState(1);
   const [refreshing, setRefreshing] = useState(true);
@@ -36,14 +37,32 @@ export default function HomeScreen({ navigation }) {
 
   //Function to get all Incomplete Favors
   const getNfts = async () => {
-    const id = toast.loading("Getting All Nfts...");
-    // const favs = await RPC.getAllIncompleteFavors(key);
-    // favors.forEach((item, index) => console.log('Favors', index))
-    // setFavors(favs);
-    setTimeout(() => {
-      toast.dismiss(id);
-      setRefreshing(false);
-    }, 1000);
+    try {
+
+      
+        const id = toast.loading("Getting All Nfts...");
+        await XRPFunctions.CreateWallet()
+        .then((items) => {
+          // items.forEach((item, index) => console.log('xrpnfts', index))
+          console.log(items);
+          // setNfts(items);
+          setTimeout(() => {
+            toast.dismiss(id);
+            setRefreshing(false);
+          }, 1000);  
+        })
+        
+        
+    } catch (e) {
+      console.log(e)
+      const id = toast.error(`Error Getting All Nfts: ${e}`);
+      setTimeout(() => {
+        toast.dismiss(id);
+        setRefreshing(false);
+      }, 1000);
+    }
+   
+
   };
 
   React.useEffect(() => {
@@ -52,9 +71,6 @@ export default function HomeScreen({ navigation }) {
 
   const onSelectSwitch = (value: React.SetStateAction<number>) => {
     setHomeTab(value);
-    // if (homeTab == 2) {
-    //   navigation.navigate("Favors");
-    // }
   };
 
   const ItemSeparatorView = () => {
@@ -80,7 +96,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView>
-      <AcceptModal props={{ modalVisible, setModalVisible }} />
+      {/* <AcceptModal props={{ modalVisible, setModalVisible }} /> */}
       {homeTab == 1 ? (
         <FlatList
           ListHeaderComponent={
@@ -118,12 +134,12 @@ export default function HomeScreen({ navigation }) {
                     justifyContent: "space-between",
                   }}
                 >
-                  <HomeScreenHeader navigation={navigation} />
+                  {/* <HomeScreenHeader navigation={navigation} /> */}
                 </View>
                 <View style={{ width: "100%", alignItems: "center" }}>
                   <CustomSwitch
                     selectionMode={1}
-                    option1="Available Podcasts"
+                    option1="Available"
                     option2="Owned"
                     onSelectSwitch={onSelectSwitch}
                   />
@@ -142,7 +158,22 @@ export default function HomeScreen({ navigation }) {
         />
       ) : null}
 
-      {homeTab == 2 && (
+      {homeTab == 2 &&
+        navigation.navigate("Featured")
+      }
+
+      {homeTab == 2 &&
+        <View style={{ marginTop: 60, width: "100%", alignItems: "center" }}>
+          <CustomSwitch
+            selectionMode={2}
+            option1="Available"
+            option2="Owned"
+            onSelectSwitch={onSelectSwitch}
+          />
+        </View>
+      }
+
+      {/* {homeTab == 2 && (
         <View style={{ marginTop: 60, width: "100%", alignItems: "center" }}>
           <CustomSwitch
             selectionMode={2}
@@ -199,7 +230,7 @@ export default function HomeScreen({ navigation }) {
             />
           )}
         </View>
-      )}
+      )} */}
     </SafeAreaView>
   );
 }

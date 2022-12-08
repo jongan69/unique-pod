@@ -13,7 +13,7 @@ import {
 import CustomSwitch from "../components/CustomSwitch";
 import { styles } from "../constants/style";
 
-const NFTScreen = ({ navigation }) => {
+const MintScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
@@ -56,4 +56,4 @@ const NFTScreen = ({ navigation }) => {
   );
 };
 
-export default NFTScreen;
+export default MintScreen;

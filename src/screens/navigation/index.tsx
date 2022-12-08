@@ -40,7 +40,7 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const { currentWalletAddress, email } = React.useContext(AppContext);
+  const { currentWalletAddress, loggedin } = React.useContext(AppContext);
   
   React.useEffect(() => {
     if (currentWalletAddress.length > 0) {
@@ -53,7 +53,7 @@ function RootNavigator() {
   return (
     <>
       <Stack.Navigator>
-        {!email ? (
+        {loggedin !== true && loggedin !== 'guest' ? (
           <Stack.Screen
             name="Auth"
             component={AuthStack}

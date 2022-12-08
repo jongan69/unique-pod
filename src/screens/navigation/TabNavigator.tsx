@@ -8,8 +8,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from '@react-navigation/native';
 import PaymentScreen from '../PaymentScreen';
-import NFTScreen from '../NFTScreen';
-import OffersScreen from '../OffersScreen';
+import MintScreen from '../MintScreen';
+import OwnedScreen from '../OwnedScreen';
+import FeaturedScreen from '../FeaturedScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -25,8 +26,8 @@ const HomeStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Offers"
-        component={OffersScreen}
+        name="Featured"
+        component={FeaturedScreen}
         options={({route}) => ({
           title: route.params?.title,
         })}
@@ -47,7 +48,7 @@ const TabNavigator = () => {
         tabBarActiveTintColor: colors.primary,
       }}>
       <Tab.Screen
-        name="Home2"
+        name="Available"
         component={HomeStack}
         options={({ route }) => ({
           tabBarStyle: {
@@ -60,8 +61,8 @@ const TabNavigator = () => {
         })}
       />
       <Tab.Screen
-        name="Podcasts"
-        component={NFTScreen}
+        name="Mint"
+        component={MintScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Feather name="plus" color={color} size={size} />
@@ -84,13 +85,13 @@ const TabNavigator = () => {
 };
 
 const getTabBarVisibility = (route: Partial<Route<string, object | undefined>>) => {
-  // console.log(route);
+  console.log(route);
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
-  // console.log(routeName);
+  console.log(routeName);
 
-  // if( routeName == 'News' ) {
-  //   return 'none';
-  // }
+  if( routeName == 'Featured' ) {
+    return 'none';
+  }
   return 'flex';
 };
 

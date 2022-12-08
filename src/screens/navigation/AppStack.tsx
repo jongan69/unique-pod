@@ -3,11 +3,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from '../../components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProfileScreen from '../ProfileScreen';
-import MessagesScreen from '../MessagesScreen';
 import SettingsScreen from '../SettingsScreen';
 import { useTheme } from '@react-navigation/native';
 
 import TabNavigator from './TabNavigator';
+import OwnedScreen from '../OwnedScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -45,15 +45,6 @@ const AppStack = () => {
           ),
         }}
       />
-      {/* <Drawer.Screen
-        name="Messages"
-        component={MessagesScreen}
-        options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
-          ),
-        }}
-      /> */}
       <Drawer.Screen
         name="Settings"
         component={SettingsScreen}

@@ -33,33 +33,14 @@ import { useNhostClient } from '@nhost/react';
 
 
 const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
-  const { setCurrentWalletAddress, currentWalletAddress } = React.useContext(AppContext);
+  const { setCurrentWalletAddress, currentWalletAddress, email, setEmail, password, setPassword, userInfo, setUserInfo, key, setKey } = React.useContext(AppContext);
   const { colors } = useTheme();
-  const [email, setEmail] = useState<string>("");
   let emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-
-  // setup web3auth state
-  const [key, setKey] = useState("");
   const [address, setAddress] = useState<string>("");
-
-
-  const [userInfo, setUserInfo] = useState(null);
-  const [error, setError] = useState(false)
+  const [secure, setSecure] = useState(true);
 
   // Setup nhost state
   const nhost = useNhostClient();
-
-
-  // Uses Web3Auth SDK to generate a Wallet Private key from email of PROVIDER passed in
-  // Then attempts to generate a wallet address from the private key from sdk
-  // needs added randomness for security
-  const ProviderRegister = async (Provider: string) => {
-    const id = toast.loading('Registering with provider...');
-
-    setTimeout(() => {
-      toast.dismiss(id);
-    }, 3000);
-  };
 
   // Use Nhost to sign up user for a Wallet Address from email
   const EmailRegister = async (email: string) => {
@@ -74,13 +55,13 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
     console.log('Email was: ', email)
 
     if (email.length < 80 && emailRegex.test(email)) {
-      console.log(`Wallet Entry ${email} was valid, Use Nhost to create user using magic link + web3auth sdk`);
+      console.log(`Email Entry ${email} was valid`);
 
       // Use Nhost here to Magic Link Provided email
-      const result = await nhost.auth.signIn({ email });
+      const result = await nhost.auth.signUp({ email, password });
 
-      if (result) {
-        toast.success('Check your email!', {
+      if (!result.error) {
+        toast.success('Success!', {
           width: 300
         });
       }
@@ -97,14 +78,11 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
         // Throw error toast
         toast.error(result.error.message)
       } else {
-        navigation.navigate("Keygen");
+        navigation.navigate("Profile");
       }
 
       console.log(result);
       setCurrentWalletAddress(address)
-      toast.success('Success!', {
-        width: 300
-      });
     } else {
       // Throw error toast
       toast.error('wtf', {
@@ -113,6 +91,10 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
     }
   }
 
+  
+  const fieldButtonFunction = () => {
+      setSecure(!secure);
+  }
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
       <KeyboardAwareScrollView
@@ -211,9 +193,18 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
               style={{ marginRight: 5 }}
             />
           }
-          keyboardType="password"
-          value={email}
-          onChangeText={(value: string) => setEmail(value)}
+          fieldButtonLabel={
+          <MaterialIcons
+            name="remove-red-eye"
+            size={20}
+            color="#666"
+            style={{ marginRight: 5 }}
+          />}
+          inputType="password"
+          secure={secure}
+          fieldButtonFunction={fieldButtonFunction}
+          value={password}
+          onChangeText={(value: string) => setPassword(value)}
         />
 
         <CustomButton label={'Register'} onPress={() => EmailRegister(email)} />
