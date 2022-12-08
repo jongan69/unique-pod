@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, ActivityIndicator } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import { toast } from "@backpackapp-io/react-native-toast";
+
 import InputField from "./InputField";
 import { Ionicons } from "@expo/vector-icons";
 import * as XRPFunctions from '../../xrpRPC';
-// import * as nftStorage from '../../ipfs';
-
+const apiUrl = 'https://api.nft.storage/upload';
+const storageApiKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDUyMkQzODI3RjUzM0IwRjkzMmUwZGQ5YjhDQTY1NzNCZDBGNDcyOWUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1MTIxMDUyMjc0MCwibmFtZSI6ImRlbW8ifQ.2gT7maxJhiHD2e2EtaDIIlqSAb6meTWveph6ywPRe78';
 import { AppContext } from "../context/AppProvider";
 
 const PodcastMinter = ({ podcast, setPodcast }) => {
@@ -22,27 +25,27 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
     const name = podcast.name;
     const filename = podcast.uri;
     file.append(name, filename);
-    // for (const name in podcast) {
-    //   file.append(name, podcast[name]);
-    // }
 
-    const ipfs = await fetch("https://api.nft.storage/store", {
+
+    fetch(apiUrl, {
       method: 'POST',
-      body: file,
+      body: podcast,
       headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDUyMkQzODI3RjUzM0IwRjkzMmUwZGQ5YjhDQTY1NzNCZDBGNDcyOWUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY3MDQ3Njk4NTQzNSwibmFtZSI6InVuaXF1ZS1wb2QifQ.sJPDQ4Q8I4iDRUkNNnw1RLVvXEbd1rIRU3I5_hvGuog"
+        Authorization: `Bearer ${storageApiKey}`
       },
+    }).then(async (data) => {
+      let response = await data.json();
+      toast.success(`Uploaded Audio to IPFS`);
+      toast.success(`ipfs://${response.value.cid}`);
+      console.log('IPFS URL:', `ipfs://${response.value.cid}`);
+      console.log(response);
+      // Mint Podcast as NFT using IPFS and XRPL
+      // const post = await XRPFunctions.mintToken(podcast);
+      // setMintData(post);
+      setModalVisible(!modalVisible);
+      // clear podcast;
+      setPodcast();
     })
-
-    // Mint Podcast as NFT using key and podcast
-    // const post = await XRPFunctions.mintToken(podcast);
-
-    // return post;
-    console.log(ipfs);
-    setMintData(ipfs);
-    setModalVisible(!modalVisible)
-    setPodcast();
   }
 
   return (
@@ -77,7 +80,7 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
             /> */}
             <Pressable
               style={[styles.button, { backgroundColor: colors.primary }]}
-              onPress={() => {}}>
+              onPress={() => { }}>
               <Text style={styles.textStyle}>Done</Text>
             </Pressable>
           </View>
