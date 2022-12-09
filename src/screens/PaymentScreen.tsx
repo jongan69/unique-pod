@@ -71,7 +71,7 @@ const Payment = ({ navigation }) => {
                 fontSize: 19,
               }}
             >
-              Recent Payments
+              Transactions
             </Text>
             <View
               style={{
@@ -112,7 +112,7 @@ const Payment = ({ navigation }) => {
                 fontSize: 19,
               }}
             >
-              Balances
+              Stats
             </Text>
             <View
               style={{
@@ -124,6 +124,25 @@ const Payment = ({ navigation }) => {
                 width: 340,
               }}
             >
+
+              <Text
+                style={{
+                  margin: 4,
+                  width: 350,
+                  fontSize: 19,
+                }}
+              >
+                XRP: 0
+              </Text>
+              <Text
+                style={{
+                  margin: 4,
+                  width: 350,
+                  fontSize: 19,
+                }}
+              >
+                NFTS Minted: 0
+              </Text>
               <Text
                 style={{
                   margin: 4,
@@ -134,15 +153,6 @@ const Payment = ({ navigation }) => {
                 NFTS Owned: 0
               </Text>
 
-              <Text
-                style={{
-                  margin: 4,
-                  width: 350,
-                  fontSize: 19,
-                }}
-              >
-                XRP:0
-              </Text>
             </View>
           </View>
         </View>

@@ -1,9 +1,9 @@
 import React from "react";
 import { Card } from "react-native-paper";
-import { Text } from "../components/Themed";
+import { Text } from "./Themed";
 import { useTheme } from "@react-navigation/native";
 
-const FavorCard = (item, navigation) => {
+const PodcastCard = (item, navigation) => {
   const { colors } = useTheme();
 
   console.log("datas", item.item[3]);
@@ -38,4 +38,4 @@ const FavorCard = (item, navigation) => {
   );
 };
 
-export default FavorCard;
+export default PodcastCard;

@@ -14,14 +14,14 @@ import CustomSwitch from "../components/CustomSwitch";
 import { AppContext } from "../context/AppProvider";
 import HomeScreenHeader from "../components/HomescreenHeader";
 import { toast } from "@backpackapp-io/react-native-toast";
-import FavorCard from "../components/FavorCard";
+import FavorCard from "../components/PodcastCard";
 import { AcceptModal } from "../components/AcceptModal";
 import { Feather } from "@expo/vector-icons";
 import AcceptButton from "../components/AcceptButton";
 import * as XRPFunctions from '../../xrpRPC';
 
 export default function HomeScreen({ navigation }) {
-  const { email, nfts, setNfts, currentWalletAddress, key } =
+  const { email, nfts, setNfts, currentWalletAddress, setCurrentWalletAddress, key, setKey } =
     React.useContext(AppContext);
   const [homeTab, setHomeTab] = useState(1);
   const [refreshing, setRefreshing] = useState(true);
@@ -38,21 +38,23 @@ export default function HomeScreen({ navigation }) {
   //Function to get all Incomplete Favors
   const getNfts = async () => {
     try {
-
-      
-        const id = toast.loading("Getting All Nfts...");
+      if (!currentWalletAddress) {
+        const id = toast.loading("Creating a Wallet");
         await XRPFunctions.CreateWallet()
-        .then((items) => {
-          // items.forEach((item, index) => console.log('xrpnfts', index))
-          console.log(items);
-          // setNfts(items);
-          setTimeout(() => {
-            toast.dismiss(id);
-            setRefreshing(false);
-          }, 1000);  
-        })
-        
-        
+          .then((items) => {
+            console.log(items);
+            setKey(items.wallet.privateKey);
+            setCurrentWalletAddress(items.wallet.classicAddress);
+            const id2 = toast.success(`Wallet Address Created`);
+            setTimeout(() => {
+              toast.dismiss(id);
+              toast.dismiss(id2);
+              setRefreshing(false);
+            }, 1000);
+          })
+      }
+      // const id = toast.loading("Getting All Nfts...");
+
     } catch (e) {
       console.log(e)
       const id = toast.error(`Error Getting All Nfts: ${e}`);
@@ -61,7 +63,7 @@ export default function HomeScreen({ navigation }) {
         setRefreshing(false);
       }, 1000);
     }
-   
+
 
   };
 
