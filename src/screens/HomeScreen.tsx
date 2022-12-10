@@ -12,10 +12,8 @@ import { styles } from "../constants/style";
 import { useTheme } from "@react-navigation/native";
 import CustomSwitch from "../components/CustomSwitch";
 import { AppContext } from "../context/AppProvider";
-import HomeScreenHeader from "../components/HomescreenHeader";
 import { toast } from "@backpackapp-io/react-native-toast";
 import FavorCard from "../components/PodcastCard";
-import { AcceptModal } from "../components/AcceptModal";
 import { Feather } from "@expo/vector-icons";
 import AcceptButton from "../components/AcceptButton";
 import * as XRPFunctions from '../../xrpRPC';
@@ -25,7 +23,6 @@ export default function HomeScreen({ navigation }) {
     React.useContext(AppContext);
   const [homeTab, setHomeTab] = useState(1);
   const [refreshing, setRefreshing] = useState(true);
-  const [modalVisible, setModalVisible] = React.useState(false);
 
   const { colors } = useTheme();
 
