@@ -69,12 +69,12 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Minting your Podcast...</Text>
             <ActivityIndicator size={20} style={styles.indicator} />
-            {mintData && <Text>{mintData?.toString()}</Text>}
-            <Pressable
+            {/* {mintData && <Text>{mintData?.toString()}</Text>} */}
+            {/* <Pressable
               style={[styles.button, { backgroundColor: colors.primary }]}
               onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>Done</Text>
-            </Pressable>
+            </Pressable> */}
           </View>
         </View>
       </Modal>
