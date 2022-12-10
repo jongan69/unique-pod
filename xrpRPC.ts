@@ -8,7 +8,6 @@ export async function CreateWallet() {
     await client.connect();
     // Create a wallet and fund it with the Testnet faucet:
     const fund_result = await client.fundWallet()
-    const test_wallet = fund_result.wallet
     console.log(fund_result)
     return fund_result;
 }
@@ -31,27 +30,34 @@ export async function getAllNfts() {
     client.disconnect()
 }
 
-export async function mintToken(podcast) {
-  results = 'Connecting to ' + getNet() + '....'
-  document.getElementById('standbyResultField').value = results
-  let net = getNet()
-  const standby_wallet = xrpl.Wallet.fromSeed(standbySeedField.value)
-  const client = new xrpl.Client(net)
-  await client.connect()
-  results += '\nConnected. Minting NFToken.'
-  document.getElementById('standbyResultField').value = results
-      
+export async function mintToken(key, podcast, ipfsurl) {  
+  const client = new xrpl.Client(SERVER_URL);
+  await client.connect();
+  
+  const operational_wallet = xrpl.Wallet.fromSeed(key)
+
   // Note that you must convert the token URL to a hexadecimal 
   // value for this transaction.
   // ------------------------------------------------------------------------
   const transactionBlob = {
     "TransactionType": "NFTokenMint",
-    "Account": standby_wallet.classicAddress,
-    "URI": xrpl.convertStringToHex(standbyTokenUrlField.value),
-    "Flags": parseInt(standbyFlagsField.value),
-    "TransferFee": parseInt(standbyTransferFeeField.value),
+    "Account": operational_wallet.classicAddress,
+    "URI": xrpl.convertStringToHex(ipfsurl),
+    "Flags": parseInt(podcast.size),
+    "TransferFee": 100,
     "NFTokenTaxon": 0 //Required, but if you have no use for it, set to zero.
   }
+
+  const tx = await client.submitAndWait(transactionBlob, { wallet: operational_wallet} )
+  const nfts = await client.request({
+    method: "account_nfts",
+    account: operational_wallet.classicAddress
+  })  
+
+  console.log(`tx data: ${tx}`)
+  console.log(`nft data: ${nfts}`)
+
+  return { tx, nfts }
 }
 
 

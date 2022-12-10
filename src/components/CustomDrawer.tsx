@@ -47,7 +47,9 @@ const CustomDrawer = (
     key,
     setEmail,
     setUserInfo,
-    setLoggedin
+    setLoggedin,
+    lastBalance, 
+    setLastBalance
   } = React.useContext(AppContext);
   const [balance, setBalance] = React.useState(0);
 
@@ -127,7 +129,7 @@ const CustomDrawer = (
                 marginRight: 5,
               }}
             >
-              {balance > 0 ? `${+Number(balance).toFixed(5)}` : 0}
+              {lastBalance > 0 ? `${+Number(lastBalance).toFixed(5)}` : 0} XRP
             </Text>
             <FontAwesome5 name="coins" size={14} color="#FFF" />
           </View>

@@ -1,11 +1,11 @@
 // These are really bad
 
-const tintColorLight =  "#d75555";
-const tintColorDark =   "#d75555";
+const tintColorLight =  "#FFD700";
+const tintColorDark =   "#FFD700";
 
 export default {
   light: {
-    primary: "#d75555",
+    primary: "#FFD700",
     secondary: "rgb(199, 199, 204)",
     text: '#000',
     background: '#fff',
@@ -14,7 +14,7 @@ export default {
     tabIconSelected: tintColorLight,
   },
   dark: {
-    primary: "#d75555",
+    primary: "#FFD700",
     secondary: "rgb(199, 199, 204)",
     text: "#ffffff",
     background: '#000',
@@ -27,27 +27,27 @@ export default {
 export const DarkTheme = {
   dark: true,
   colors: {
-    primary: "#d75555",
+    primary: "#FFD700",
     secondary: "rgb(199, 199, 204)",
     background: "#000",
     card: "#ffffff",
     text: "#ffffff",
     textLight: "#fff",
     border: "rgb(199, 199, 204)",
-    notification: "#d75555",
+    notification: "#FFD700",
   },
 };
 
 export const LightTheme = {
   dark: false,
   colors: {
-    primary: "#d75555",
+    primary: "#FFD700",
     secondary: "rgb(199, 199, 204)",
     background: "#ffffff",
     card: "#ffffff",
     text: "#000",
     textLight: "#000",
     border: "rgb(199, 199, 204)",
-    notification: "#d75555",
+    notification: "#FFD700",
   },
 };

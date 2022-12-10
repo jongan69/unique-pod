@@ -14,7 +14,7 @@ import { AppContext } from "../context/AppProvider";
 const PodcastMinter = ({ podcast, setPodcast }) => {
   const { key, setKey, currentWalletAddress } = React.useContext(AppContext);
   const [modalVisible, setModalVisible] = useState(false);
-  const [mintData, setMintData] = useState(null);
+  const [mintData, setMintData] = useState({});
   const { colors } = useTheme();
 
   // Function to mint a podcast
@@ -39,9 +39,15 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
       toast.success(`ipfs://${response.value.cid}`);
       console.log('IPFS URL:', `ipfs://${response.value.cid}`);
       console.log(response);
+
       // Mint Podcast as NFT using IPFS and XRPL
-      // const post = await XRPFunctions.mintToken(podcast);
-      // setMintData(post);
+      console.log(`Minting Podcast ${podcast.name} on XRP  wallet ${currentWalletAddress}`)
+      const ipfsurl = `ipfs://${response.value.cid}`
+      await XRPFunctions.mintToken(key, podcast, ipfsurl).then((post) => {
+        console.log(post),
+        setMintData(post),
+        toast.success(`XRP NFT MINTED; ${post.tx}`);
+      })
       setModalVisible(!modalVisible);
       // clear podcast;
       setPodcast();

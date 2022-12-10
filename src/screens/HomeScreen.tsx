@@ -15,11 +15,11 @@ import { AppContext } from "../context/AppProvider";
 import { toast } from "@backpackapp-io/react-native-toast";
 import FavorCard from "../components/PodcastCard";
 import { Feather } from "@expo/vector-icons";
-import AcceptButton from "../components/AcceptButton";
+// import AcceptButton from "../components/AcceptButton";
 import * as XRPFunctions from '../../xrpRPC';
 
 export default function HomeScreen({ navigation }) {
-  const { email, nfts, setNfts, currentWalletAddress, setCurrentWalletAddress, key, setKey } =
+  const { nfts, currentWalletAddress, setCurrentWalletAddress, key, setKey, setLastBalance } =
     React.useContext(AppContext);
   const [homeTab, setHomeTab] = useState(1);
   const [refreshing, setRefreshing] = useState(true);
@@ -42,6 +42,7 @@ export default function HomeScreen({ navigation }) {
             console.log(items);
             setKey(items.wallet.privateKey);
             setCurrentWalletAddress(items.wallet.classicAddress);
+            setLastBalance(items.balance)
             const id2 = toast.success(`Wallet Address Created`);
             setTimeout(() => {
               toast.dismiss(id);

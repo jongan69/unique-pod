@@ -91,9 +91,9 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
     }
   }
 
-  
+
   const fieldButtonFunction = () => {
-      setSecure(!secure);
+    setSecure(!secure);
   }
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
@@ -194,12 +194,12 @@ const RegisterScreen: React.FunctionComponent = ({ navigation }) => {
             />
           }
           fieldButtonLabel={
-          <MaterialIcons
-            name="remove-red-eye"
-            size={20}
-            color="#666"
-            style={{ marginRight: 5 }}
-          />}
+            <MaterialIcons
+              name="remove-red-eye"
+              size={20}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />}
           inputType="password"
           secure={secure}
           fieldButtonFunction={fieldButtonFunction}
