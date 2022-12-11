@@ -59,3 +59,5 @@ To Run Nextjs App:
         10. Mint Screen ✅
 
 Note: Do not use `--updateSnapshot` from to enable proper jest testing.
+
+ideas for release: <https://www.obytes.com/blog/react-native-ci-cd-github-action>
