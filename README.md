@@ -58,4 +58,4 @@ To Run Nextjs App:
         9. Purchase Screen
         10. Mint Screen ✅
 
-Note: remove `--coverage --updateSnapshot` from `validate.yml` to enable proper testing.
+Note: Do not use `--updateSnapshot` from to enable proper jest testing.

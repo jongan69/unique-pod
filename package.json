@@ -10,7 +10,7 @@
     "webdev": "cd ./web && yarn next dev",
     "webbuild": "cd ./web && yarn next build",
     "eject": "expo eject",
-    "test": "jest --watchAll --updateSnapshot"
+    "test": "jest --watchAll"
   },
   "resolutions": {
     "@types/react-native": "^0.70.6"
