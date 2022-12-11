@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, ActivityIndicator } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { toast } from "@backpackapp-io/react-native-toast";
-
-import InputField from "./InputField";
-import { Ionicons } from "@expo/vector-icons";
 import * as XRPFunctions from '../../xrpRPC';
 const apiUrl = 'https://api.nft.storage/upload';
 const storageApiKey =
@@ -12,7 +9,7 @@ const storageApiKey =
 import { AppContext } from "../context/AppProvider";
 
 const PodcastMinter = ({ podcast, setPodcast }) => {
-  const { key, lastBalance, currentWalletAddress, seed } = React.useContext(AppContext);
+  const { currentWalletAddress, seed } = React.useContext(AppContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [mintData, setMintData] = useState({});
   const { colors } = useTheme();
@@ -70,14 +67,9 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Minting your Podcast...</Text>
+            <Text style={styles.modalText}>Minting your {podcast.name} Podcast...</Text>
             <ActivityIndicator size={20} style={styles.indicator} />
-            {/* {mintData && <Text>{mintData?.toString()}</Text>} */}
-            {/* <Pressable
-              style={[styles.button, { backgroundColor: colors.primary }]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Done</Text>
-            </Pressable> */}
+
           </View>
         </View>
       </Modal>

@@ -30,7 +30,7 @@ export const AppProvider = (props: { children: any }) => {
     const [lastBalance, setLastBalance] = useState<number>(0);
     const [seed, setSeed] = useState<string>("");
     const [key, setKey] = useState<string>("");
-    const [nfts, setNfts] = useState({});
+    const [nfts, setNfts] = useState([]);
 
     console.log(loggedin !== 'guest' ?`User is logged in: ${loggedin}` :`User is ${loggedin}`);
 

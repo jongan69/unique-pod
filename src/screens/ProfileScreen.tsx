@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { AppContext } from "../context/AppProvider";
 import { ScrollView, Text, Image, TouchableOpacity, View } from "react-native";
 import { styles } from "../constants/style";
+import { Reviews } from "../components/Reviews";
+import { Biography } from "../components/Biography";
 
 const ProfileScreen = () => {
   const [showPrivateKey, setShowPrivateKey] = useState(false);
@@ -47,14 +49,6 @@ const ProfileScreen = () => {
             <Text style={[styles.h2, { color: colors.text }]}>Email: </Text>
             <Text style={[styles.h2, { color: colors.text }]}>{email}</Text>
           </View>
-          <View style={styles.sideBySideFlexStart}>
-            <Text style={[styles.h2, { color: colors.text }]}>Joined: </Text>
-            <Text style={[styles.h2, { color: colors.text }]}>11/11/2022</Text>
-          </View>
-          <View style={styles.sideBySideFlexStart}>
-            <Text style={[styles.h2, { color: colors.text }]}>Location: </Text>
-            <Text style={[styles.h2, { color: colors.text }]}>Maine</Text>
-          </View>
         </View>
         <TouchableOpacity onPress={() => setShowPrivateKey(!showPrivateKey)}>
           <View style={styles.button}>
@@ -63,109 +57,14 @@ const ProfileScreen = () => {
             </Text>
           </View>
         </TouchableOpacity>
+
         {showPrivateKey ? (
           <Text style={[{ color: colors.text }, styles.textBox]}>{key}</Text>
-        ) : (
-          <></>
-        )}
-        <View>
-          <Text style={styles.h2}>Bio:</Text>
-        </View>
-        <View
-          style={[
-            { borderColor: colors.border, color: colors.text },
-            styles.container2,
-          ]}
-        >
-          <Text style={[{ color: colors.text }, styles.text]}>
-            Watched a lot of Bob Ross so I'm pretty good at painting. Other
-            skills: gardening, changing tyres, treating snake bites, predicting
-            weather, throwing spirals etc. Whatever your needs are, drop me a
-            line, maybe I can help.
-          </Text>
-        </View>
-        <View>
-          <Text style={styles.h2}>Reviews:</Text>
-        </View>
-        <View>
-          <View
-            s
-            style={[
-              { borderColor: colors.border, color: colors.text },
-              styles.container2,
-            ]}
-          >
-            <View style={styles.sideBySideFlexStart}>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                Service:{" "}
-              </Text>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                Hair Cut{" "}
-              </Text>
-            </View>
-            <View style={styles.sideBySideFlexStart}>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                Wallet Address:{" "}
-              </Text>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                {currentWalletAddress.slice(0, 5)}...
-                {currentWalletAddress.slice(-4)}
-              </Text>
-            </View>
-            <View style={styles.sideBySideFlexStart}>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                Reviewer:{" "}
-              </Text>
-              <Text style={[{ color: colors.text }, styles.text]}>Aaron</Text>
-            </View>
-            <Text
-              style={[
-                { borderColor: colors.border, color: colors.text },
-                styles.container2,
-              ]}
-            >
-              By far the worst haircut I have ever received. I literally have a
-              spot on the back of my head the size of a baseball.
-            </Text>
-          </View>
-          <View
-            style={[
-              { borderColor: colors.border, color: colors.text },
-              styles.container2,
-            ]}
-          >
-            <View style={styles.sideBySideFlexStart}>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                Service:
-              </Text>
-              <Text style={[{ color: colors.text }, styles.text]}>Chef</Text>
-            </View>
-            <View style={styles.sideBySideFlexStart}>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                Wallet Address:
-              </Text>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                {currentWalletAddress.slice(0, 5)}...
-                {currentWalletAddress.slice(-4)}
-              </Text>
-            </View>
-            <View style={styles.sideBySideFlexStart}>
-              <Text style={[{ color: colors.text }, styles.text]}>
-                Reviewer:
-              </Text>
-              <Text style={[{ color: colors.text }, styles.text]}>Lisa</Text>
-            </View>
-            <Text
-              style={[
-                { borderColor: colors.border, color: colors.text },
-                styles.container2,
-              ]}
-            >
-              Isabella was very professional and the food was delicious.
-              Everything was very thoughtful and presented beautifully.
-            </Text>
-          </View>
-        </View>
+        ) : null }
+
+        <Biography/>
+        
+        <Reviews/>
       </View>
     </ScrollView>
   );

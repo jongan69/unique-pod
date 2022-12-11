@@ -1,4 +1,7 @@
 import React from "react";
+import * as WebBrowser from 'expo-web-browser';
+import Constants from 'expo-constants';
+
 import {
   View,
   Text,
@@ -65,21 +68,9 @@ const CustomDrawer = (
     });
   };
 
-  // const getBalance = async (key: string) => {
-  //   const id = toast.loading("Getting Balance...");
-  //   await RPC.getBalance(key).then((bal) => {
-  //     console.log(bal);
-  //     setBalance(bal);
-  //     // setBalance(parseInt(bal.toHexString(), 16))
-  //     setTimeout(() => {
-  //       toast.dismiss(id);
-  //     }, 3000);
-  //   });
-  // };
-
-  // React.useEffect(() => {
-  //   getBalance(key);
-  // }, []);
+  function shareApp(url) {
+    WebBrowser.openBrowserAsync(url);
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -155,7 +146,7 @@ const CustomDrawer = (
         </View>
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#ccc" }}>
-        <TouchableOpacity onPress={() => {}} style={{ paddingVertical: 15 }}>
+        <TouchableOpacity onPress={() => {shareApp(Constants.expoConfig?.githubUrl)}} style={{ paddingVertical: 15 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Ionicons name="share-social-outline" size={22} />
             <Text

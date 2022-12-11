@@ -9,7 +9,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from '@react-navigation/native';
 import PaymentScreen from '../PaymentScreen';
 import MintScreen from '../MintScreen';
-import OwnedScreen from '../OwnedScreen';
 import FeaturedScreen from '../FeaturedScreen';
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +28,7 @@ const HomeStack = () => {
         name="Featured"
         component={FeaturedScreen}
         options={({route}) => ({
-          title: route.params?.title,
+          title: 'Featured Podcasts',
         })}
       />
     </Stack.Navigator>
