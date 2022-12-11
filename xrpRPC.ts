@@ -30,11 +30,13 @@ export async function getAllNfts() {
     client.disconnect()
 }
 
-export async function mintToken(key, podcast, ipfsurl) {  
+export async function mintToken(seed, podcast, ipfsurl) {  
+  console.log('MINT DATA: ' + seed + podcast + ipfsurl)
+
   const client = new xrpl.Client(SERVER_URL);
   await client.connect();
   
-  const operational_wallet = xrpl.Wallet.fromSeed(key)
+  const operational_wallet = xrpl.Wallet.fromSeed(seed);
 
   // Note that you must convert the token URL to a hexadecimal 
   // value for this transaction.
@@ -43,8 +45,8 @@ export async function mintToken(key, podcast, ipfsurl) {
     "TransactionType": "NFTokenMint",
     "Account": operational_wallet.classicAddress,
     "URI": xrpl.convertStringToHex(ipfsurl),
-    "Flags": parseInt(podcast.size),
-    "TransferFee": 100,
+    "Flags": 8,
+    "TransferFee": 1000,
     "NFTokenTaxon": 0 //Required, but if you have no use for it, set to zero.
   }
 

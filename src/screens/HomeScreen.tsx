@@ -19,7 +19,7 @@ import { Feather } from "@expo/vector-icons";
 import * as XRPFunctions from '../../xrpRPC';
 
 export default function HomeScreen({ navigation }) {
-  const { nfts, currentWalletAddress, setCurrentWalletAddress, key, setKey, setLastBalance } =
+  const { nfts, currentWalletAddress, setCurrentWalletAddress, key, setKey, setLastBalance, seed, setSeed } =
     React.useContext(AppContext);
   const [homeTab, setHomeTab] = useState(1);
   const [refreshing, setRefreshing] = useState(true);
@@ -43,6 +43,7 @@ export default function HomeScreen({ navigation }) {
             setKey(items.wallet.privateKey);
             setCurrentWalletAddress(items.wallet.classicAddress);
             setLastBalance(items.balance)
+            setSeed(items.wallet.seed);
             const id2 = toast.success(`Wallet Address Created`);
             setTimeout(() => {
               toast.dismiss(id);

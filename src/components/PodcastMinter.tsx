@@ -12,7 +12,7 @@ const storageApiKey =
 import { AppContext } from "../context/AppProvider";
 
 const PodcastMinter = ({ podcast, setPodcast }) => {
-  const { key, setKey, currentWalletAddress } = React.useContext(AppContext);
+  const { key, lastBalance, currentWalletAddress, seed } = React.useContext(AppContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [mintData, setMintData] = useState({});
   const { colors } = useTheme();
@@ -26,32 +26,34 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
     const filename = podcast.uri;
     file.append(name, filename);
 
-
-    fetch(apiUrl, {
-      method: 'POST',
-      body: podcast,
-      headers: {
-        Authorization: `Bearer ${storageApiKey}`
-      },
-    }).then(async (data) => {
-      let response = await data.json();
-      toast.success(`Uploaded Audio to IPFS`);
-      toast.success(`ipfs://${response.value.cid}`);
-      console.log('IPFS URL:', `ipfs://${response.value.cid}`);
-      console.log(response);
-
-      // Mint Podcast as NFT using IPFS and XRPL
-      console.log(`Minting Podcast ${podcast.name} on XRP  wallet ${currentWalletAddress}`)
-      const ipfsurl = `ipfs://${response.value.cid}`
-      await XRPFunctions.mintToken(key, podcast, ipfsurl).then((post) => {
-        console.log(post),
-        setMintData(post),
-        toast.success(`XRP NFT MINTED; ${post.tx}`);
-      })
-      setModalVisible(!modalVisible);
-      // clear podcast;
-      setPodcast();
-    })
+    try {
+      fetch(apiUrl, {
+        method: 'POST',
+        body: podcast,
+        headers: {
+          Authorization: `Bearer ${storageApiKey}`
+        },
+      }).then(async (url) => {
+        await url.json().then(async (url) => {
+          toast.success(`Uploaded Audio to IPFS`);
+          toast.success(`ipfs://${url.value.cid}`);
+          console.log('IPFS URL:', `ipfs://${url.value.cid}`);
+          const ipfsurl = `ipfs://${url.value.cid}`
+          // console.log(url);
+          // Mint Podcast as NFT using IPFS and XRPL
+          console.log(`Minting Podcast ${podcast.name} on XRP  wallet ${currentWalletAddress}`)
+          const post = await XRPFunctions.mintToken(seed, podcast, ipfsurl);
+          console.log(post),
+          setMintData(post),
+          toast.success(`XRP NFT MINTED; ${mintData}`);
+          setModalVisible(!modalVisible);
+          // clear podcast;
+          setPodcast();
+        })
+      });
+    } catch (err) {
+      toast.error(`Fail: ${err}`);
+    }
   }
 
   return (

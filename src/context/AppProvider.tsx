@@ -28,13 +28,15 @@ export const AppProvider = (props: { children: any }) => {
     const [userInfo, setUserInfo] = useState({});
     const [currentWalletAddress, setCurrentWalletAddress] = useState<string>("");
     const [lastBalance, setLastBalance] = useState<number>(0);
+    const [seed, setSeed] = useState<string>("");
+
     const [key, setKey] = useState<string>("");
     const [nfts, setNfts] = useState([]);
 
     console.log(loggedin !== 'guest' ?`User is logged in: ${loggedin}` :`User is ${loggedin}`);
 
     return (
-        <AppContext.Provider value={{ currentWalletAddress, setCurrentWalletAddress, key, setKey, email, setEmail, userInfo, setUserInfo, nfts, setNfts, setLoggedin, loggedin, password, setPassword,lastBalance, setLastBalance }}>
+        <AppContext.Provider value={{ currentWalletAddress, setCurrentWalletAddress, key, setKey, email, setEmail, userInfo, setUserInfo, nfts, setNfts, setLoggedin, loggedin, password, setPassword,lastBalance, setLastBalance, seed, setSeed }}>
             {props.children}
         </AppContext.Provider >
     )
