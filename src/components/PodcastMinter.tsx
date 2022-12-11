@@ -37,6 +37,7 @@ const PodcastMinter = ({ podcast, setPodcast }) => {
         await url.json().then(async (url) => {
           toast.success(`Uploaded Audio to IPFS`);
           toast.success(`ipfs://${url.value.cid}`);
+          // console.log('NFT.Storage URL:', `${JSON.stringify(url.value)}`);
           console.log('IPFS URL:', `ipfs://${url.value.cid}`);
           const ipfsurl = `ipfs://${url.value.cid}`
           // console.log(url);

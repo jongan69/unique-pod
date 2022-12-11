@@ -21,13 +21,28 @@ export async function Connect() {
     client.disconnect()
 }
 
-export async function getAllNfts() {
+export async function getAllNfts(seed) {
     const client = new xrpl.Client(SERVER_URL);
     // Define the network client
-    await client.connect()
-    // ... custom code goes here
+    await client.connect();
+    const operational_wallet = xrpl.Wallet.fromSeed(seed);
+
+    const nfts = await client.request({
+      method: "account_nfts",
+      account: operational_wallet.classicAddress
+    });
+
+    let urls = []
+    nfts.result.account_nfts.forEach((item) => {
+      console.log(`nfts found: https://${xrpl.convertHexToString(item.URI).slice(7)}.ipfs.nftstorage.link`)
+      urls.push(`https://${xrpl.convertHexToString(item.URI).slice(7)}.ipfs.nftstorage.link`)
+    })
+
+
+
     // Disconnect when done (If you omit this, Node.js won't end the process)
     client.disconnect()
+    return { nfts, urls }
 }
 
 export async function mintToken(seed, podcast, ipfsurl) {  

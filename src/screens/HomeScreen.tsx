@@ -7,6 +7,7 @@ import {
   RefreshControl,
   FlatList,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { styles } from "../constants/style";
 import { useTheme } from "@react-navigation/native";
@@ -15,11 +16,10 @@ import { AppContext } from "../context/AppProvider";
 import { toast } from "@backpackapp-io/react-native-toast";
 import FavorCard from "../components/PodcastCard";
 import { Feather } from "@expo/vector-icons";
-// import AcceptButton from "../components/AcceptButton";
 import * as XRPFunctions from '../../xrpRPC';
 
 export default function HomeScreen({ navigation }) {
-  const { nfts, currentWalletAddress, setCurrentWalletAddress, key, setKey, setLastBalance, seed, setSeed } =
+  const { nfts, currentWalletAddress, setCurrentWalletAddress, key, setKey, setLastBalance, setSeed, seed, setNfts } =
     React.useContext(AppContext);
   const [homeTab, setHomeTab] = useState(1);
   const [refreshing, setRefreshing] = useState(true);
@@ -52,8 +52,23 @@ export default function HomeScreen({ navigation }) {
             }, 1000);
           })
       }
-      // const id = toast.loading("Getting All Nfts...");
 
+      if (seed) {
+        await XRPFunctions.getAllNfts(seed).then((data) => {
+          if(data.nfts) {
+            setNfts(data.urls),
+            console.log(`NFTs found ${data.nfts}`);
+          const id3 = toast.loading(`Nfts Found: ${data.nfts}`);
+          setTimeout(() => {
+            toast.dismiss(id3);
+            setRefreshing(false);
+          }, 1000);
+          } else {
+            console.log(`NFTs not found`);
+            toast.error(`Nfts Not Found: `);
+          }
+        });
+      }
     } catch (e) {
       console.log(e)
       const id = toast.error(`Error Getting All Nfts: ${e}`);
@@ -74,31 +89,26 @@ export default function HomeScreen({ navigation }) {
     setHomeTab(value);
   };
 
-  const ItemSeparatorView = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: "#C8C8C8",
-        }}
-      />
-    );
-  };
+  function handleHelpPress(url) {
+    WebBrowser.openBrowserAsync(url);
+  }
+
 
   const ListItem = ({ item }) => {
     return (
       <View style={{ flexDirection: "row", padding: 10 }}>
-        <FavorCard item={item} />
-        <AcceptButton item={item} navigation={navigation} />
+        <TouchableOpacity onPress={handleHelpPress(item)}>
+          <Text>
+            Item
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   };
 
   return (
     <SafeAreaView>
-      {/* <AcceptModal props={{ modalVisible, setModalVisible }} /> */}
-      {homeTab == 1 ? (
+      {homeTab == 1 && nfts ? (
         <FlatList
           ListHeaderComponent={
             <View>
@@ -152,7 +162,7 @@ export default function HomeScreen({ navigation }) {
             <RefreshControl refreshing={refreshing} onRefresh={getNfts} />
           }
           // stickyHeaderHiddenOnScroll={false}
-          data={nfts}
+          // data={nfts}
           keyExtractor={(item, index) => index?.toString()}
           renderItem={ListItem}
           style={{ width: "100%" }}
@@ -171,6 +181,9 @@ export default function HomeScreen({ navigation }) {
             option2="Owned"
             onSelectSwitch={onSelectSwitch}
           />
+          {/* {nfts.forEach(() => {
+
+          })} */}
         </View>
       }
 
