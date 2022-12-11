@@ -45,13 +45,15 @@ To Run Nextjs App:
 - [x] Figma Screen Designs
 - [x] Lucid Charts User Journey Diagram
 - [ ] Nextjs App + Thirdwebjs Auth - Nextjs SDK
-- [ ] Nhost - React Native SDK
+- [x] Nhost - React Native SDK
 - [ ] Mobile App Screens
-        1. Onboard Screen
-        2. Login Screen -> Nhost
-        3. Sign Up Screen -> Nhost
-        4. Homescreen 1
-        5. Swap Crypto Screen
-        6. About screen
-        7. Purchase Screen
-        8. Mint Screen
+        1. Onboard Screen ✅
+        2. Login Screen -> Nhost ✅ (GUEST)
+        3. Sign Up Screen -> Nhost ✅ (GUEST)
+        4. Homescreen 1 -> Display Owned -> getNfts()
+        5. Homescreen 2 -> Display Available -> All Brokered NFTs
+        6. Featured Screen
+        7. Payment Screen
+        8. About screen
+        9. Purchase Screen
+        10. Mint Screen ✅
