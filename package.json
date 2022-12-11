@@ -49,6 +49,7 @@
     "expo-web-browser": "~12.0.0",
     "fs": "^0.0.1-security",
     "goober": "^2.1.11",
+    "lint": "^0.8.19",
     "mime": "^3.0.0",
     "nft.storage": "^7.0.0",
     "path": "^0.12.7",
@@ -82,7 +83,7 @@
     "@types/react-native-dotenv": "^0.2.0",
     "jest": "^26.6.3",
     "jest-expo": "^47.0.0",
-    "react-test-renderer": "17.0.2",
+    "react-test-renderer": "^18.2.0",
     "typescript": "^4.6.3"
   },
   "private": true

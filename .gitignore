@@ -11,6 +11,7 @@ npm-debug.*
 web-build/
 .env
 contracts/artifacts
+src/components/__tests__/__snapshots__
 
 # macOS
 .DS_Store
