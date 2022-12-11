@@ -57,3 +57,5 @@ To Run Nextjs App:
         8. About screen
         9. Purchase Screen
         10. Mint Screen ✅
+
+Note: remove `--coverage --updateSnapshot` from `validate.yml` to enable proper testing.
