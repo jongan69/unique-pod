@@ -29,4 +29,6 @@ jobs:
 
       - name: Test
         run: yarn test
+      
+      - name: Quit
         run: q
