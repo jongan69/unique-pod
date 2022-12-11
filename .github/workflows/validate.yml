@@ -26,9 +26,3 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install packages
         run: yarn install --frozen-lockfile
-
-      - name: Test
-        run: yarn test
-        
-      - name: Quit
-        run: q
